@@ -6,15 +6,7 @@ import time
 import importlib
 import inspect
 import traceback
-import readline
 RECENT_PROMPT=""
-
-def completer(text, state):
-	options = [cmd for cmd in commands if cmd.startswith(text)]
-	return options[state] if state < len(options) else None
-
-readline.set_completer(completer)
-readline.parse_and_bind('tab: complete')
 
 class Location:
 	def __init__(self, loc=__file__):

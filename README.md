@@ -3,7 +3,14 @@ Disappointing User Shell Terminal
 
 # Features
 
-| Feature   | Implement | Stable |
+| Feature   | Implemented | Stable |
 |-----------|-----------|--------|
 |  Pipes    |     ✓     |    ✓  |
 | Command Cancellation |    ✓      |    ✓   |
+
+# Commands
+
+| Command | Unix | Windows|
+|---------|------|--------|
+| ls      |  ✓   |   ✓   |
+| filter  |  ×   |   ✓

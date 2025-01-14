@@ -1,2 +1,2 @@
-# dust
-disappointing user shell terminal
+# Dust
+Disappointing User Shell Terminal

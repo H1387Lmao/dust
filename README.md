@@ -6,4 +6,4 @@ Disappointing User Shell Terminal
 | Feature   | Implement | Stable |
 |-----------|-----------|--------|
 |  Pipes    |     ✓     |    ✓  |
-| Command   Cancelation |     ✓     |        | ✓ |
+| Command   Cancelation |     ✓     |        |      ✓      |

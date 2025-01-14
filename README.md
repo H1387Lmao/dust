@@ -10,7 +10,7 @@ Disappointing User Shell Terminal
 
 # Commands
 
-| Command | Unix | Windows|
-|---------|------|--------|
-| ls      |  ✓   |   ✓   |
-| filter  |  ×   |   ✓
+| Command | Unix | Windows| Description |
+|---------|------|--------|-------------|
+| ls      |  ✓   |   ✓   | List files in current directory |
+| filter  |  ×   |   ✓    | filters the output of the previous command (`Folder`\`File`\`Glob Pattern`) |

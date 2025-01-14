@@ -3,7 +3,9 @@ Disappointing User Shell Terminal
 
 # Features
 
-| Feature | Implement | Stable |
-|---------|-----------|--------|
-|  Pipes  |     ✓     |    ✓  |
-|---------|-----------|--------|
+| Feature   | Implement | Stable |
+|-----------|-----------|--------|
+|  Pipes    |     ✓     |    ✓  |
+|-----------|-----------|--------|
+| Command   |     ✓     |        |
+|Cancelation|           |        |

@@ -9,13 +9,16 @@ import traceback
 RECENT_PROMPT=""
 
 class Location:
-	def __init__(self, loc=__file__):
-		# If loc is the default (__file__), normalize it to the directory of the file
+	def __init__(self, loc=__file__):# If loc is the default (__file__), normalize it to the directory of the file
 		if loc == __file__:
 			loc = os.path.dirname(loc)
+		if os.name!="nt":
+			if loc[0]=="/":
+				loc="root__++dir"+loc
 		self.loc = self.normalize(loc)
 		self._parent = self.normalize(os.path.dirname(self.loc))
-		self.file_name = os.path.basename(loc)
+		if os.path.isfile(loc):
+			self.file_name = os.path.basename(loc)
 	@property
 	def parent(self):
 		return Location(self._parent)
@@ -47,7 +50,8 @@ class Location:
 			elif part and part != ".":  # Ignore empty parts and "."
 				parts.append(part)
 		# Reconstruct the path
-		return "/".join(parts)
+		new = "/".join(parts)
+		return new.replace("root__++dir", "")
 
 	@staticmethod
 	def glob(location, pattern):
@@ -58,7 +62,7 @@ class Location:
 		# Use glob to find matching paths based on the pattern (supports wildcards)
 		matches = glob.glob(Location.join(location, pattern))
 		# Return a list of Location objects for matched paths
-		return [Location(match) for match in matches]
+		return [Location(loc) for loc in matches]
 
 	def __repr__(self):
 		return self.loc
@@ -68,7 +72,8 @@ class CommandCancelled(Exception):
 
 # Global signal handler to prevent shell exit
 def global_signal_handler(sig, frame):
-	sys.stdout.write(Format("&1^C&7\n"))
+	if os.name=="nt":
+		sys.stdout.write(Format("&1^C&7\n"))
 	sys.stdout.flush()
 
 # Register the global signal handler
@@ -104,9 +109,10 @@ def Input(prompt='', max_length=None, default=None, case_sensitive=True, show_ec
 		try:
 			char = sys.stdin.read(1)
 		except KeyboardInterrupt:
-			sys.stdout.flush()
-			user_input = ""
-			return ""
+			if os.name=="nt":
+				sys.stdout.flush()
+				user_input = ""
+				return ""
 		if char == '':
 			sys.stdout.flush()
 			user_input = ""
@@ -196,5 +202,6 @@ while not breaked:
 			else:
 				print(Format(f"&1Unknown command: {cmd_name}&7"))
 	except KeyboardInterrupt:
-		sys.stdout.write(Format("&1^C&7\n"))
+		if os.name=="nt":
+			sys.stdout.write(Format("&1^C&7\n"))
 		sys.stdout.flush()

@@ -27,7 +27,10 @@ def main(*args, **kwargs):
 			print(f'\t{loc}')
 		return locations
 	else:
+	
 		locations = location.glob(location, filter_type)
+		print(location)
+		print(locations, location.glob)
 		if not kwargs['quiet']:
 			print(f'FOLDER CONTENT WITH FILTER: {filter_type}')
 			for loc in locations:

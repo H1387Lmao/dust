@@ -13,4 +13,4 @@ Disappointing User Shell Terminal
 | Command | Unix | Windows| Description |
 |---------|------|--------|-------------|
 | ls      |  ✓   |   ✓   | List files in current directory |
-| filter  |  ×   |   ✓    | filters the output of the previous command (`Folder`\`File`\`Glob Pattern`) |
+| filter  |  ×   |   ✓    | filters the output of the previous command (`Folder` / `File` / `Glob Pattern`) |

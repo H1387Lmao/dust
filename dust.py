@@ -12,13 +12,12 @@ class Location:
 	def __init__(self, loc=__file__):# If loc is the default (__file__), normalize it to the directory of the file
 		if loc == __file__:
 			loc = os.path.dirname(loc)
-		if os.name!="nt":
-			if loc[0]=="/":
-				loc="root__++dir"+loc
 		self.loc = self.normalize(loc)
 		self._parent = self.normalize(os.path.dirname(self.loc))
 		if os.path.isfile(loc):
 			self.file_name = os.path.basename(loc)
+		else:
+		    self.file_name=""
 	@property
 	def parent(self):
 		return Location(self._parent)
@@ -51,16 +50,18 @@ class Location:
 				parts.append(part)
 		# Reconstruct the path
 		new = "/".join(parts)
-		return new.replace("root__++dir", "")
+		new = "/"+new if os.name!="nt" else new
+		return new
 
 	@staticmethod
 	def glob(location, pattern):
 		# If location is a Location instance, use its loc attribute
 		if isinstance(location, Location):
-			location = location.loc
-
+			location = Location.normalize(location.loc)
+		nloc=Location.join(location, pattern)
+		print(nloc)
 		# Use glob to find matching paths based on the pattern (supports wildcards)
-		matches = glob.glob(Location.join(location, pattern))
+		matches = glob.glob(nloc)
 		# Return a list of Location objects for matched paths
 		return [Location(loc) for loc in matches]
 
